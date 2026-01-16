@@ -51,9 +51,9 @@ Captura de tela em 375px | Screenshot in 375px
 
 ---
 
-Você também pode conferir a página acessando [este link](https://todo-app-chi-one.vercel.app/).
+Você também pode conferir a página acessando [este link](guess-the-word-dev-challenges.vercel.app).
 
-*You can also check the page by accessing [this link](https://todo-app-chi-one.vercel.app/).*
+*You can also check the page by accessing [this link](guess-the-word-dev-challenges.vercel.app).*
 
 ## Tecnologias utilizadas | Technologies used
 
