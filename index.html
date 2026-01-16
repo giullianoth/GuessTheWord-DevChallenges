@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" href="/assets/resources/favicon.ico" type="image/x-icon" sizes="96x96" />
+  <link rel="stylesheet" href="/assets/styles/style.css">
+
+  <title>Guess The Word Game | devChallenges.io</title>
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>World Scramblle</h1>
+    </header>
+
+    <main class="main">
+      <div class="attempted-letters"></div>
+
+      <div class="attempts">
+        <div class="tries">
+          <p>
+            Tries (<span class="attempt"></span>/<span class="max-attempt"></span>):
+          </p>
+
+          <span class="try"></span>
+          <span class="try"></span>
+          <span class="try"></span>
+          <span class="try"></span>
+          <span class="try"></span>
+        </div>
+
+        <div class="mistakes">
+          <p>Mistakes:</p>
+          <span class="mistakes-list"></span>
+        </div>
+      </div>
+
+      <div class="word"></div>
+
+      <div class="actions">
+        <button class="restart-button">Random</button>
+        <button class="reset-button">Reset</button>
+      </div>
+    </main>
+  </div>
+
+  <footer class="author-info">
+    Coded by <a href="https://github.com/giullianoth">Giulliano Guimarães</a> | Challenge by
+    <a href="https://devchallenges.io/challenge/guess-the-word" target="_blank">devChallenges.io</a>.
+  </footer>
+
+  <script type="module" src="/assets/scripts/script.js"></script>
+</body>
+
+</html>

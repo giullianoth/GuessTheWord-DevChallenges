@@ -1,0 +1,270 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root {
+    /* COLORS */
+    --color-primary: #7429C6;
+    --color-secondary: #C951E7;
+    --color-tertiary: #672171;
+    --color-background-primary: #171E30;
+    --color-background-secondary: #4A5567;
+    --color-background-tertiary: #97A3B6;
+    --color-background-shadow: #030616;
+    --color-text: #F2F5F9;
+    --color-background-overlay: #171E3099;
+    --color-game-won: #00514E;
+    --color-game-over: #b14200;
+
+    /* TYPOGRAPHY */
+    --font-outfit: "Outfit", sans-serif;
+    --font-size-large: 2rem;
+    --font-size-medium: 1.25rem;
+    --font-size-small: 0.75rem;
+    --font-size-button: 0.875rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("/assets/resources/bg-guess-the-word-small.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-outfit);
+    color: var(--color-text);
+}
+
+.container {
+    max-width: 780px;
+    max-height: calc(100vh - 45px);
+    overflow-y: auto;
+    background-color: var(--color-background-primary);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: var(--font-size-medium);
+    background-image: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.attempted-letters {
+    margin-bottom: 20px;
+    background-color: var(--color-background-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: var(--font-size-large);
+    border-radius: 10px;
+    padding: 10px;
+    border-bottom: 5px solid var(--color-background-shadow);
+    min-height: 60px;
+}
+
+.attempted-letters span {
+    margin-top: -8px;
+}
+
+.attempts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.tries, .mistakes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.try {
+    width: 7px;
+    height: 7px;
+    background-color: var(--color-background-secondary);
+    border-radius: 50%;
+}
+
+.try.past {
+    background-color: var(--color-primary);
+}
+
+.word {
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.letter {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: var(--font-size-large);
+    background: none;
+    border: 3px solid var(--color-background-secondary);
+    border-radius: 10px;
+    color: inherit;
+    font-family: inherit;
+    outline: none;
+    padding-bottom: 3px;
+    caret-color: transparent;
+    cursor: pointer;
+}
+
+.letter.revealed {    
+    color: var(--color-text) !important;
+    border-color: var(--color-game-over) !important;
+}
+
+.letter.won {
+    border-color: var(--color-game-won) !important;
+}
+
+.letter.wrong, .letter.wrong:focus {
+    color: var(--color-background-secondary);
+}
+
+.letter-wrapper {
+    position: relative;
+}
+
+.cursor {
+    width: 16px;
+    height: 3px;
+    background-color: var(--color-text);
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.letter:focus, .letter.correct {
+    border-color: var(--color-tertiary);
+    color: var(--color-text);
+}
+
+.letter:not(.correct):focus ~ .cursor {
+    animation: active_cursor 1000ms infinite steps(1);
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.actions button {
+    padding: 10px 40px;
+    font-family: inherit;
+    color: inherit;
+    font-size: var(--font-size-button);
+    background-color: var(--color-secondary);
+    border: none;
+    border-bottom: 3px solid var(--color-tertiary);
+    border-radius: 10px;
+    font-weight: 600;
+    transition-duration: 300ms;
+    cursor: pointer;
+}
+
+.actions button.secondary {
+    background-color: var(--color-background-tertiary);
+    border-color: var(--color-background-primary);
+}
+
+.actions button:hover {
+    opacity: 0.9;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-background-overlay);
+}
+
+.modal-container {
+    background-color: var(--color-background-secondary);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: var(--font-size-large);
+    max-width: none;
+    width: auto;
+    padding: 30px;
+}
+
+.author-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-small);
+    padding-block: 5px;
+}
+
+.author-info a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.author-info a:hover {
+    text-decoration: underline;
+}
+
+@keyframes active_cursor {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        background-image: url("/assets/resources/bg-guess-the-word.jpg");
+    }
+
+    .attempts {
+        flex-direction: row;
+    }
+}
