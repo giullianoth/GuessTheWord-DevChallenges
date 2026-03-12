@@ -67,7 +67,7 @@ body {
     color: transparent;
 }
 
-.attempted-letters {
+.scrambled-word {
     margin-bottom: 20px;
     background-color: var(--color-background-secondary);
     display: flex;
@@ -82,7 +82,7 @@ body {
     min-height: 60px;
 }
 
-.attempted-letters span {
+.scrambled-word span {
     margin-top: -8px;
 }
 

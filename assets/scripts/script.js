@@ -1,17 +1,14 @@
-import { Attempts } from "./attempts.js"
-import { ChooseWord } from "./choose-word.js"
-import { Game } from "./game.js"
-import { ResetWord, RestartGame } from "./restart.js"
-import { getElement } from "./variables.js"
-
-const restartButton = getElement(".restart-button")
-const resetButton = getElement(".reset-button")
+import Game from "./game.js"
+import PlaceWord from "./place-word.js"
+import { ResetAttempts, RestartGame } from "./restart-game.js"
+import { resetButton, restartButton } from "./variables.js"
+import { ChooseAndScramble } from "./words.js"
 
 window.addEventListener("load", () => {
-    ChooseWord()
-    Attempts()
+    ChooseAndScramble()
+    PlaceWord()
     Game()
 
     restartButton.addEventListener("click", RestartGame)
-    resetButton.addEventListener("click", ResetWord)
+    resetButton.addEventListener("click", ResetAttempts)
 })

@@ -1,9 +1,7 @@
-import { getElement, getElements } from "./variables.js"
-
 /**
  * List of words for the game.
  */
-export const words = [
+const words = [
     "adventure", "alphabet", "aquarium", "astronaut", "backpack",
     "balloon", "bicycle", "blizzard", "blueprint", "cactus",
     "calendar", "camera", "castle", "champion", "compass",
@@ -27,86 +25,62 @@ export const words = [
 ]
 
 /**
- * The selected word for the game
+ * Scrambles the specified word and returns the array, letter by letter
+ * @param {string} word - The word to scramble
+ * @returns {string[]} The array of scrambled word
  */
-export var choosenWord = ""
+const scrambleWord = word => {
+    const splitted = word.split("")
+    let currentIndex = splitted.length
+
+    while (currentIndex > 0) {
+        const randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--
+
+        [splitted[currentIndex], splitted[randomIndex]] = [splitted[randomIndex], splitted[currentIndex]]
+    }
+
+    return splitted
+}
 
 /**
- * The current attempt of the game
+ * The choosen word of the game
  */
-export var attempts = 1
+export var choosenWord
 
 /**
- * The maximum number of attempts in the game
+ * The scrambled choosen word
  */
-export const maxAttempts = 5
+export var scrambledChoosenWord
 
 /**
- * Sets the word after select it
- * @param {string} newWord 
+ * The splitter choosen word, letter by letter
+ * @returns {string[]} The array of the word
+ */
+export const splittedChoosenWord = () => choosenWord.split("")
+
+/**
+ * Sets the choosen word
+ * @param {string} word - The new choosen word
  * @returns {void}
  */
-export const setChoosenWord = newWord => choosenWord = newWord
+export const setChoosenWord = word => choosenWord = word
 
 /**
- * The selected word divided letter by letter
- * @returns {string[]}
- */
-export const splittedWord = () => choosenWord.split("")
-
-/**
- * Increments the current attempt in 1
+ * Sets the scrambled choosen word
+ * @param {string} word - The new scrambled word
  * @returns {void}
  */
-export const incrementAttempts = () => attempts += 1
+export const setScrambledChoosenWord = word => scrambledChoosenWord = word
 
 /**
- * The DOM of the current attempt
+ * Chooses a word from the list and scrambles it
  */
-export const attemptsElement = getElement(".attempt")
+export const ChooseAndScramble = () => {
+    const wordIndex = Math.floor(Math.random() * words.length)
+    const word = words[wordIndex]
+    const scrambledWord = scrambleWord(word)
 
-/**
- * The DOM of the number of maximum attempts
- */
-export const maxAttemptsElement = getElement(".max-attempt")
-
-/**
- * The list of elements of attempts progress
- */
-export const attemptsBullets = getElements(".try")
-
-/**
- * The list of all attempted letters
- */
-export var attempedLetters = []
-
-/**
- * The list of incorrect letters
- */
-export var wrongLetters = []
-
-/**
- * The regular expression containing only letters
- */
-export const validLetters = /[a-zA-Z]/
-
-/**
- * Resets the list of attempted letters
- * @returns {void}
- */
-export const resetAttemptedLetters = () => attempedLetters = []
-
-/**
- * Resets the list of incorrect letters
- * @returns {void}
- */
-export const resetWrongLetters = () => wrongLetters = []
-
-/**
- * Resets the list of letters and current attempt at the same time
- */
-export const resetAttempts = () => {
-    attempts = 1
-    resetAttemptedLetters()
-    resetWrongLetters()
+    setChoosenWord(word)
+    setScrambledChoosenWord(scrambledWord)
 }

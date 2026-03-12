@@ -39,9 +39,9 @@ export const letterElement = () => {
 
 /**
  * Creates a dialog box for decision making.
- * @param {string|HTMLElement} content An element or a text to fill the content area
- * @param {string} primaryButtonLabel The text label for the primary button
- * @param {string} secondaryButtonLabel  The text label for the secondary button - optional
+ * @param {string|HTMLElement} content - An element or a text to fill the content area
+ * @param {string} primaryButtonLabel - The text label for the primary button
+ * @param {string} secondaryButtonLabel - The text label for the secondary button - optional
  * @returns {HTMLDivElement} The modal element
  */
 export const modalElement = (content, primaryButtonLabel, secondaryButtonLabel = "") => {
@@ -56,14 +56,14 @@ export const modalElement = (content, primaryButtonLabel, secondaryButtonLabel =
     modalContainer.className = "container modal-container"
     modalActions.className = "actions"
 
+    primaryButton.innerText = primaryButtonLabel
+    modalActions.append(primaryButton)
+
     if (secondaryButtonLabel) {
         secondaryButton.className = "secondary"
         secondaryButton.innerText = secondaryButtonLabel
         modalActions.append(secondaryButton)
     }
-
-    primaryButton.innerText = primaryButtonLabel
-    modalActions.append(primaryButton)
 
     modalContent.innerHTML = content
 
@@ -87,7 +87,7 @@ export const modalButtons = () => getElements("button", modal())
 
 /**
  * Closes the modal by clicking on overlay area.
- * @param {HTMLElement} modal 
+ * @param {HTMLElement} modal - The modal element
  */
 export const closeModal = modal => {
     modal.addEventListener("click", event => {
@@ -98,17 +98,59 @@ export const closeModal = modal => {
 }
 
 /**
- * The element of attempted letters
+ * The element of scrambled word
  */
-export const attemptedLettersElement = getElement(".attempted-letters")
+export const scrambledElement = getElement(".scrambled-word")
 
 /**
  * The element of incorrect letters
  */
-export const mistakesElement = getElement(".mistakes-list")
+export const mistakesElement = getElement(".mistakes-letters")
 
 /**
  * The list of input containing each letter of selected word
  * @returns {HTMLElement[] | null | undefined}
  */
 export const letterInputs = () => getElements(".letter")
+
+/**
+ * The current attempt of the game
+ */
+export var attempts = 1
+
+/**
+ * The maximum number of attempts in the game
+ */
+export const maxAttempts = 5
+
+/**
+ * Increments the current attempt in 1
+ * @returns {void}
+ */
+export const incrementAttempt = () => attempts += 1
+
+/**
+ * Reset the number of attempts to 1
+ * @returns {void}
+ */
+export const resetAttempts = () => attempts = 1
+
+/**
+ * The element of current attempt
+ */
+export const attemptElement = getElement(".attempt")
+
+/**
+ * The list of elements of attempts progress
+ */
+export const attemptsBullets = getElements(".try")
+
+/**
+ * The button to choose a new word
+ */
+export const restartButton = getElement(".restart-button")
+
+/**
+ * The button to reset the attempts of the current word
+ */
+export const resetButton = getElement(".reset-button")
